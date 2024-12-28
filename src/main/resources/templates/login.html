@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сторінка входу</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+            color: #444;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        h2 {
+            color: #3b5998;
+            margin-bottom: 20px;
+        }
+
+        .error {
+            color: red;
+            margin-bottom: 15px;
+        }
+
+        .logout {
+            color: green;
+            margin-bottom: 15px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 8px;
+        }
+
+        .remember-me {
+            text-align: left;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"] {
+            background-color: #3b5998;
+            color: #fff;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #2b4781;
+        }
+
+        .guest-button {
+            background-color: #808080;
+            color: #fff;
+        }
+
+        .guest-button:hover {
+            background-color: #666666;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        footer {
+            background: #192f6a;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <h2>Вхід</h2>
+
+    <!-- Error Message for Failed Login -->
+    <div th:if="${param.error}" class="error">
+        ПОМИЛКА 401: Не вдалося ввійти.
+        <span th:if="${session['SPRING_SECURITY_LAST_EXCEPTION'] != null}">
+                Причина: <span th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"></span>
+            </span>
+    </div>
+
+    <!-- Logout Success Message -->
+    <div th:if="${param.logout}" class="logout">
+        You have been logged out.
+    </div>
+
+    <form th:action="@{/login}" method="post">
+        <input type="text" id="username" name="username" required placeholder="Введіть своє ім'я користувача">
+        <input type="password" id="password" name="password" required placeholder="Введіть свій пароль">
+
+        <div class="remember-me">
+            <label for="remember-me">
+                <input type="checkbox" id="remember-me" name="remember-me"> Запам'ятати мене
+            </label>
+        </div>
+
+        <div class="button-container">
+            <button type="submit">Вхід</button>
+            <button type="button" class="guest-button" onclick="window.location.href='/home'; return false;">Продовжити як гість</button>
+        </div>
+    </form>
+</div>
+
+<footer>
+    &copy; 2024 Система керування музикою. Всі права захищено.
+</footer>
+
+</body>
+</html>
