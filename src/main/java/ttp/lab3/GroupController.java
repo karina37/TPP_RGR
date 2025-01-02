@@ -18,6 +18,12 @@ public class GroupController {
         model.addAttribute("groups", groupService.getAllGroups());
         return "groups";
     }
+
+    @GetMapping("/add")
+    public String addGroup() {
+        return "groups";
+    }
+    
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/save")
     public String saveGroup(@ModelAttribute Group group, Model model) {
