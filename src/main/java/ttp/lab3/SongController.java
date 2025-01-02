@@ -21,6 +21,11 @@ public class SongController {
         return "songs";
     }
 
+    @GetMapping("/add")
+    public String addSong() {
+        return "songs";
+    }
+
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/save")
     public String saveSong(@ModelAttribute Song song, Model model) {
