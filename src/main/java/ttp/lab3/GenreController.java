@@ -21,6 +21,11 @@ public class GenreController {
         return "genres";
     }
 
+     @GetMapping("/add")
+    public String addGenre() {
+        return "genres";
+    }
+
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/save")
     public String saveGenre(@ModelAttribute Genres genre, Model model) {
