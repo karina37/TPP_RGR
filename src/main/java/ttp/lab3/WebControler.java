@@ -7,23 +7,8 @@ import org.springframework.web.bind.annotation.*;
 public class WebControler{
 
     @GetMapping("/")
-    public String main() {
-        return "home";
-    }
-
-    @GetMapping("/groups/add")
-    public String addGroup() {
-        return "groups";
-    }
-
-    @GetMapping("/genres/add")
-    public String addGenre() {
-        return "genres";
-    }
-
-    @GetMapping("/songs/add")
-    public String addSong() {
-        return "songs";
+    public String redirectToHome() {
+        return "redirect:/home";
     }
 
     @GetMapping("/home")
